@@ -100,6 +100,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }elseif($phone_err==true){
             echo "La validación del phone ha fallado";
         }
+    }else{
+        echo "Uno de los datos requeridos no ha sido rellenado";
     }
 
     if(isset($_POST["address"])){
