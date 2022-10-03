@@ -10,13 +10,11 @@ $name = $email = $phone = $address = $city = $province = $zip = $other = $news =
  * @return $data
  */
 
-function limpiar_dato($data)
-{
+function limpiar_dato($data){
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
-
 }
 
 //nombre, email y nº de telefono.
@@ -27,14 +25,13 @@ function limpiar_dato($data)
  * @return boolean
  */
 
-    function validar_name($name)
-    {
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+    function validar_name($name){
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)){
             return false;
-            }else{
-                return true;
+        }else{
+            return true;
+        }
     }
-}
 
     function validar_email($email)
     {
@@ -75,6 +72,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     echo"$email <br>";
     $phone = limpiar_dato($_POST["phone"]);
     echo"$phone<br>";
+    if (validar_name($name)){
+
+    }else{
+        $name_err=true; 
+    }
+
+    if (validar_email($email)){
+        
+    }else{
+        $email_err=true; 
+    }
+
+    if (validar_phone($phone)){
+        
+    }else{
+        $phone_err=true; 
+    }
+
+    if(validar_name(["$name"]) || validar_email(["$email"]) || validar_phone(["$phone"])){
+
+    }else{
+        if($name_err==true){
+            echo "La validación del name ha fallado";
+        }elseif($email_err==true){
+            echo "La validación del email ha fallado";
+        }elseif($phone_err==true){
+            echo "La validación del phone ha fallado";
+        }
+    }
 
     if(isset($_POST["address"])){
         $address = limpiar_dato ($_POST["address"]);
