@@ -91,7 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(validar_name(["$name"]) || validar_email(["$email"]) || validar_phone(["$phone"])){
-
+//errores en todos lados
     }else{
         if($name_err==true){
             echo "La validación del name ha fallado";
@@ -101,7 +101,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo "La validación del phone ha fallado";
         }
     }else{
-        echo "Uno de los datos requeridos no ha sido rellenado";
+        echo "Uno de los datos requeridos no ha sido rellenado"; 
     }
 
     if(isset($_POST["address"])){
