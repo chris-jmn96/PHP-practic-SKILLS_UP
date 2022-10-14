@@ -125,11 +125,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $zip = NULL;
             }
             
-            if(isset($_POST["newscheck"])){
-                $newscheck = limpiar_dato ($_POST["newscheck"]);
-            }else{
-                $newscheck = NULL;
-            }
+            // if(isset($_POST["newscheck"])){
+            //     $newscheck = limpiar_dato ($_POST["newscheck"]);
+            // }else{
+            //     $newscheck = NULL;
+            // }
             
             if(isset($_POST["news"])){
                 $news = limpiar_dato ($_POST["news"]);
@@ -151,24 +151,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo "<br><strong>Province:</strong>" . $province . "<br>";
             echo "<br><strong>Zip:</strong>" . $zip . "<br>";
             echo "<br><strong>other:</strong>" . $other . "<br>";
-            echo "<br><strong>News:</strong>" . $news . "<br>";
+           // echo "<br><strong>News:</strong>" . $news . "<br>";
             echo "<br><strong>Newscheck:</strong>" . $newscheck . "<br>";
             
-            
-            //var_dump($newsletter);
             //echo "</br>";
-            /*          $newsletter = filter_input(
+            $newscheck = filter_input(
                 INPUT_POST,
-    
-        
-        
-            /*  $string=implode(", ",$newsletter);
+                'newscheck',
+                FILTER_SANITIZE_SPECIAL_CHARS,
+                FILTER_REQUIRE_ARRAY
+            );
+            var_dump($newscheck);
+            echo "<br>Longitud de newsletter: " . count($newscheck) .".";
+            echo "<br>";
+
+            $string=implode(", ",$newscheck);
             echo $string;
-            echo "</br>"; */
+            echo "</br>"; 
             // === FIN MOSTRAR valores array.
         
             $other = limpiar_dato($_POST["other"]);
-            echo "<strong>Noticias que quiere recibir: $newscheck";
+            // echo "<strong>Noticias que quiere recibir: $newscheck";
             var_dump($name);
             
             echo "<br><strong>Name:</strong> $name <br>";
