@@ -213,9 +213,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else {
                 echo "no valida";
             }
-        
-            SELECT fullname, email, phone from news_reg WHERE $name="fullname", $email="email", $phone="phone";
-            INSERT INTO fullname, email, phone, address, city, province, zipcode, newsletter, 
+         
         }else{
         
             // var_dump($phone);
