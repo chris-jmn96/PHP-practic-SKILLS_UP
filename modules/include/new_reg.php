@@ -4,6 +4,7 @@ require"../require/config.php";
 //define y inicializa las variables que se van a usar del formulario.
 $name = $email = $phone = $address = $city = $province = $zip = $other = $news = $newscheck="";
 $name_err = $email_err = $phone_err = false;
+$newsLettercheck;
 /**
  * Función para limpiar un dato procedente de un formulario.
  * 
@@ -163,6 +164,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             );
             var_dump($newscheck);
             echo "<br>Longitud de newsletter: " . count($newscheck) .".";
+
+            $lengArray = count($newscheck);
+            switch ($lengArray){
+                case 1:
+                    if ($newscheck [0] == "HTML"){
+                        $newsLettercheck = 100;
+                    } elseif ($newscheck [0] == "CSS"){
+                        $newsLettercheck = 010;
+                    } else {
+                        $newsLettercheck = 001;
+                    }
+                    break;
+                case 2: 
+                    if (newscheck[0] != "HTML"){
+                        $newsLettercheck = 011;
+                    } elseif (newscheck[0] != "CSS") {
+                        $newsLettercheck = 101;
+                    } else {
+                        $newsLettercheck = 110;
+                    }
+                    break;
+                case 3:
+                    $newscheck == 111;
+                    break;
+                default:
+                    $newscheck == 100;
+            }
+
+            echo "Valor a devolver" . $newsLettercheck;
             echo "<br>";
 
             $string=implode(", ",$newscheck);
@@ -184,6 +214,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "no valida";
             }
         
+            SELECT fullname, email, phone from news_reg WHERE $name="fullname", $email="email", $phone="phone";
+            INSERT INTO fullname, email, phone, address, city, province, zipcode, newsletter, 
         }else{
         
             // var_dump($phone);
