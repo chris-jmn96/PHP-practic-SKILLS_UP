@@ -169,27 +169,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             switch ($lengArray){
                 case 1:
                     if ($newscheck [0] == "HTML"){
-                        $newsLettercheck = 100;
+                        $newsLettercheck = bindec('100');
                     } elseif ($newscheck [0] == "CSS"){
-                        $newsLettercheck = 010;
+                        $newsLettercheck = bindec('010');
                     } else {
-                        $newsLettercheck = 001;
+                        $newsLettercheck = bindec('001');
                     }
                     break;
                 case 2: 
                     if (newscheck[0] != "HTML"){
-                        $newsLettercheck = 011;
+                        $newsLettercheck = bindec('011');
                     } elseif (newscheck[0] != "CSS") {
-                        $newsLettercheck = 101;
+                        $newsLettercheck = bindec('101');
                     } else {
-                        $newsLettercheck = 110;
+                        $newsLettercheck = bindec('110');
                     }
                     break;
                 case 3:
-                    $newscheck == 111;
+                    $newscheck == bindec('111');
                     break;
                 default:
-                    $newscheck == 100;
+                    $newscheck == bindec('100');
             }
 
             echo "Valor a devolver" . $newsLettercheck;
@@ -207,12 +207,47 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo "<br><strong>Name:</strong> $name <br>";
             echo "<strong>Telefono:</strong> $phone <br>";
             echo "<strong>Email: </strong> $email <br>";
-            
-            if (validar_name($name)){
-                echo "validada";
+
+        try{
+            $sql = "SELECT * from news_reg WHERE fullname = :fullname OR email = :email OR phone = :phone";
+
+            $stmt = $conn->prepare($sql);
+
+            $stmt->bindParam(":fullname", $name, PDO::PARAM_STR);
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+            $stmt->bindParam(":phone", $phone, PDO::PARAM_STR);
+
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            echo "resultado es: " . var_dump($resultado) . "<br>";
+            if($resultado){
+                echo "La información existe.<br>";
             } else {
-                echo "no valida";
+                try{
+                    $sql = "INSERT INTO news_reg (fullname, email, phone, address, city, state, zipcode, newsletters, format_news, suggestion) VALUES (:fullname, :email, :phone, :address, :city, :state, :zipcode, :newsletters, :format_news, :suggestion)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':fullname', $name, PDO::PARAM_STR);
+                    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                    $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+                    $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+                    $stmt->bindParam(':city', $city, PDO::PARAM_STR);
+                    $stmt->bindParam(':state', $province, PDO::PARAM_STR);
+                    $stmt->bindParam(':zipcode', $zip, PDO::PARAM_STR);
+                    $stmt->bindParam(':newsletters', $newsLettercheck, PDO::PARAM_INT);
+                    $stmt->bindParam(':format_news', $news, PDO::PARAM_INT);
+                    $stmt->bindParam(':suggestion', $other, PDO::PARAM_STR);
+
+                    $stmt->execute();
+                    echo "New record created successfully. <br>";
+                    echo "Valor a ingresado decimal de 3bit: " . $newsLettercheck . "<br>";
+                } catch(PDOException $e) {
+                    echo $sql . "<br>" . $e->getMessage();
+                }
+                $conn = null;
             }
+        }   catch (PDOException $e){
+            echo $sql . "<br>" . $e->getMessage();
+        }
          
         }else{
         
