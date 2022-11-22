@@ -1,0 +1,51 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: verdana;
+}
+
+table, tr, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: rgb(197, 197, 255);
+}
+
+table{
+    width: 95%;
+    border-radius: 5px;
+    margin: 2em auto
+}
+
+th{
+    background-color: red;
+    color: white;
+    height: 50px;
+}
+
+td{
+    height: 50px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+button{
+    width: 10%;
+    height: 50px;
+    background-color: rgb(197, 197, 255);
+    font-weight: bolder;
+    margin-left: 45%;
+    margin-top: 1%;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+button:hover{
+    background-color: red;
+    color: white;
+    border-color: white;
+    transition: .3s;
+    width: 15%;
+    height: 60px;
+    margin-left: 43%
+}

@@ -18,7 +18,6 @@ function limpiar_dato($data)
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
-
 }
 
 //nombre, email y nº de telefono.
@@ -29,23 +28,21 @@ function limpiar_dato($data)
  * @return boolean
  */
 
-    function validar_name($name)
-    {
+    function validar_name($name){
         if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
             return false;
-            }else{
-                return true;
-    }
-}
-
-    function validar_email($email)
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return false;
-            }else{
-                return true;
-                }
+        }else{
+            return true;
         }
+    }
+
+    function validar_email($email){
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }else{
+            return true;
+        }
+    }
         
         //TODO:documentar función.
         /**
@@ -61,10 +58,6 @@ function limpiar_dato($data)
                 return true;
             }
         }
-
-
-
-    
 
 //Si (llega datos)Entonces
 
@@ -265,7 +258,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }else{
         echo "No han llegado las variables requeridas";
     }   
-} else{
+}else{
         echo "fallo el metodo post";
 }
 
