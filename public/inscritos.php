@@ -1,5 +1,5 @@
 <?php
-require "../module/require/config.php";
+require "../modules/require/config.php";
 htmlspecialchars($_SERVER['PHP_SELF']);
 $_SERVER['REQUEST_METHOD'] == NULL;
 ?>
@@ -46,7 +46,7 @@ $_SERVER['REQUEST_METHOD'] == NULL;
                         </thead>';
 
                         foreach(($rows = $stmt->fetchAll()) as $row){
-                            echo '<tr>
+                            echo "<tr>
                             <td>".$row["fullname"]."</td>
                             <td>".$row["email"]."</td>
                             <td>".$row["phone"]."</td>
@@ -57,7 +57,7 @@ $_SERVER['REQUEST_METHOD'] == NULL;
                             <td>".$row["newsletters"]."</td>
                             <td>".$row["format_news"]."</td>
                             <td>".$row["suggestion"]."</td>
-                            </tr>';
+                            </tr>";
                         }
                         echo '</tr>
                         </table>';           
